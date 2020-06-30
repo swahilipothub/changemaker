@@ -1,0 +1,81 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Apply Here</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Sample Page</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- <h5>Apply here</h5> -->
+                                </div>
+                                <div class="card-block">
+                                    <form role="form" method="post" action="">
+                                        {% csrf_token %}
+
+                                        <div class="form-group">
+                                            <label for="project_name">{{ form.project_name.label }}</label>
+                                            {{ form.project_name }}
+                                        </div>
+                                        <span class="text-error">{{ form.project_name.errors }}</span>
+
+                                        <div class="form-group">
+                                            <label for="project_description">{{ form.project_description.label }}</label>
+                                            {{ form.project_description }}
+                                        </div>
+                                        <span class="text-error">{{ form.project_description.errors }}</span>
+
+                                        <div class="form-group">
+                                            <label for="project_sector">{{ form.project_sector.label }}</label>
+                                            {{ form.project_sector }}
+                                        </div>
+                                        <span class="text-error">{{ form.project_sector.errors }}</span>
+
+                                        <div class="form-group">
+                                            <label for="people_impacted">{{ form.people_impacted.label }}</label>
+                                            {{ form.people_impacted }}
+                                        </div>
+                                        <span class="text-error">{{ form.people_impacted.errors }}</span>
+
+                                        <button class="btn btn-success" type="submit">Apply</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

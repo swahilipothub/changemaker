@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',   
-    'app'  # Enable the inner app 
+    'app',
+    'application'
 ]
 
 AUTH_USER_MODEL = 'users.User'
