@@ -1,0 +1,121 @@
+{% extends "layouts/base.html" %}
+{% block title %} My Applications {% endblock %} 
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="col-md-12">
+    <div class="card flex-fill">
+        <div class="card-body table-full-width">
+            <div class="card-header">
+                <div class="card-actions float-right">
+                    <a href="#" class="mr-1">
+                        <i class="align-middle" data-feather="refresh-cw"></i>
+                    </a>
+                    <div class="d-inline-block dropdown show">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModalPrimary">
+                            Apply
+                        </button>
+
+                        <div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Default modal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body m-3">
+                                        <form role="form" method="post" action="">
+                                            {% csrf_token %}
+                                
+                                            <div class="form-group">
+                                                <div class="col-md-12 ">
+                                                    <label for="project_name">{{ form.project_name.label }}</label>
+                                                    {{ form.project_name }}
+                                                </div>
+                                            </div>
+                                            <span class="text-error">{{ form.project_name.errors }}</span>
+                                
+                                            <div class="form-group">
+                                                <div class="col-md-12 ">
+                                                    <label for="project_description">{{ form.project_description.label }}</label>
+                                                    {{ form.project_description }}
+                                                </div>
+                                            </div>
+                                            <span class="text-error">{{ form.project_description.errors }}</span>
+                                
+                                            <div class="form-group">
+                                                <div class="col-md-12 ">
+                                                    <label for="project_sector">{{ form.project_sector.label }}</label>
+                                                    {{ form.project_sector }}
+                                                </div>
+                                            </div>
+                                            <span class="text-error">{{ form.project_sector.errors }}</span>
+                                
+                                            <div class="form-group">
+                                                <div class="col-md-12 ">
+                                                    <label for="people_impacted">{{ form.people_impacted.label }}</label>
+                                                    {{ form.people_impacted }}
+                                                </div>
+                                            </div>
+                                            <span class="text-error">{{ form.people_impacted.errors }}</span>
+                                            <!-- <div class="card-footer ">
+                                                <button type="submit" class="btn btn-fill btn-info">Apply</button>
+                                            </div> -->
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Apply Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" data-toggle="dropdown" data-display="static">
+                            <i class="align-middle" data-feather="more-vertical"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Apply</a>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="card-title mb-0">My Applications</h5>
+            </div>
+            <table id="bootstrap-table" class="table table-striped my-0">
+                <thead>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <th data-field="id">User</th>
+                    <th data-field="name" data-sortable="true">Application Number</th>
+                    <th data-field="salary" data-sortable="true">Project Name</th>
+                    <th data-field="country" data-sortable="true">Application Date</th>
+                    <th data-field="city">Status</th>
+                    <!-- <th data-field="actions" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">Actions</th> -->
+                </thead>
+                <tbody>
+                    {% if applications %}
+                        {% for app in applications %}
+                            <tr>
+                                <td></td>
+                                <td><a href="/application/{{ app.id }}">{{ app.user.profile.full_name }}</a></td>
+                                <td><a href="/application/{{ app.id }}">{{ app.application_no }}</a></td>
+                                <td><a href="/application/{{ app.id }}">{{ app.project_name }}</a></td>
+                                <td><a href="/application/{{ app.id }}">{{ app.application_date }}</a></td>
+                                <td><a href="/application/{{ app.id }}">{{ app.status }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

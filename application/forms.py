@@ -22,7 +22,8 @@ class ApplicationForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 "placeholder" : "Please Describe your project",                
-                "class": "form-control"
+                "class": "form-control",
+                'style': 'height: 10em;'
             }
         ))
     

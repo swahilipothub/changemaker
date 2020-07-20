@@ -68,7 +68,7 @@ class SignUpForm(UserCreationForm):
         fields = ('mobile_number', 'password1', 'password2')
 
 
-class Profile(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -108,10 +108,18 @@ class Profile(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 "placeholder" : "Bio",                
-                "class": "form-control"
+                "class": "form-control",
+                "rows": 4,
+                'style': 'height: 6em;'
             }
         ))
     
     class Meta:
         model = Profile
         fields = ('first_name', 'last_name', 'email', 'location', 'birth_date', 'bio',)
+
+    def save(self, *args, **kwargs):
+        u = self.instance
+        u.save()
+        profile = super(ProfileForm, self).save(*args, **kwargs)
+        return profile

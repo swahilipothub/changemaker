@@ -31,7 +31,7 @@ class Application(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=128)
-    project_description = models.CharField(max_length=500)
+    project_description = models.CharField(max_length=1500)
     project_sector = models.CharField(max_length=32, choices=SECTORS)
     people_impacted = models.IntegerField()
     application_no = models.CharField(max_length=7, 

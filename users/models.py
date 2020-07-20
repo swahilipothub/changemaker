@@ -60,7 +60,8 @@ class Profile(models.Model):
         '''
         today = date.today()
         born = self.birth_date
-        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        if self.birth_date:
+            return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
     def get_short_name(self):
         '''

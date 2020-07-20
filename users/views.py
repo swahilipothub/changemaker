@@ -4,16 +4,17 @@ License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.views import View
+from django.shortcuts import render, redirect, get_object_or_404
 from django.forms.utils import ErrorList
-from django.http import HttpResponse
-from .forms import LoginForm, SignUpForm
-from .models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import LoginForm, SignUpForm, ProfileForm
+from .models import User, Profile
 
 
 def login_view(request):
@@ -61,3 +62,48 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg" : msg, "success" : success })
+
+
+@login_required
+def settings(request):
+    user = request.user
+    profile = get_object_or_404(Profile, user=user)
+    form = ProfileForm(instance=profile)
+    form_pwd = PasswordChangeForm(request.user, request.POST)
+    profile = request.user.profile
+
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile, data=request.POST)
+        form_pwd = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Updated the Profile Successfully!")
+            return HttpResponseRedirect('/profile/settings/')
+
+        elif form_pwd.is_valid():
+            user = form_pwd.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return HttpResponseRedirect(reverse('/profile/settings/'))
+
+    return render(request, 'accounts/settings.html', {
+        'form': form,
+        'form_pwd': form_pwd,
+        'profile': profile
+    })
+
+
+# @login_required
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)
+#             messages.success(request, 'Your password was successfully updated!')
+#             return HttpResponseRedirect(reverse('profile'))
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'accounts/change_password.html', {
+#         'form': form
+#     })

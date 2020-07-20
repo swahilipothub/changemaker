@@ -7,29 +7,35 @@ from .models import Application
 from .forms import ApplicationForm
 
 
-class ApplicationCreateView(LoginRequiredMixin, CreateView):
-    # model = Application
+# class ApplicationCreateView(LoginRequiredMixin, CreateView):
+#     form_class = ApplicationForm
+#     template_name = 'application/list.html'
+#     success_url = reverse_lazy('applications')
+
+#     def form_valid(self, form):
+#         obj = form.save(commit=False)
+#         obj.user = self.request.user
+#         obj.save()
+#         return HttpResponseRedirect('/application/')
+
+
+class ApplicationListView(LoginRequiredMixin, CreateView, ListView):
+    context_object_name = 'applications'
+    queryset = Application.objects.filter()
+    template_name = 'application/applications.html'
     form_class = ApplicationForm
-    template_name = 'application/create.html'
-    success_url = reverse_lazy('applications')
 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.user = self.request.user
         obj.save()
-        return HttpResponseRedirect('/application/')
-
-
-class ApplicationListView(LoginRequiredMixin, ListView):
-    context_object_name = 'applications'
-    queryset = Application.objects.all()
-    template_name = 'application/list.html'
+        return HttpResponseRedirect('/application/applications/')
 
 
 class ApplicationPending(LoginRequiredMixin, ListView):
     context_object_name = 'pending_applications'
-    queryset = Application.objects.all()
-    template_name = 'application/list.html'
+    queryset = Application.objects.filter()
+    template_name = 'application/applications.html'
 
 
 class ApplicationDetailView(LoginRequiredMixin, DetailView):
@@ -39,6 +45,4 @@ class ApplicationDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         obj = super().get_object()
-        # obj.last_accessed = timezone.now()
-        # obj.save()
         return obj
