@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',   
     'app',
-    'application'
+    'application',
+    'sms'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -130,3 +131,7 @@ STATICFILES_DIRS = (
 )
 #############################################################
 #############################################################
+
+AFRICASTALKING_USERNAME = 'serani'
+AFRICASTALKING_API_KEY = '9e4f78c35742a8f3e9c188860e0ce150fb7e5df5cfdb9fdcbd16735a7980f51c'
+AFRICASTALKING_SENDER = 'SeraniTrust'
