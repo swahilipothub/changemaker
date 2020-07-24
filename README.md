@@ -75,8 +75,8 @@ If the container fails to start, check for errors in the logs via
 $ docker-compose -f docker-compose.prod.yml logs -f.
 ```
 
-Again, requests to http://localhost:1337/staticfiles/* will be served from the "staticfiles" directory.
+Again, requests to http://localhost/staticfiles/* will be served from the "staticfiles" directory.
 
-Navigate to http://localhost:1337/admin and ensure the static assets load correctly.
+Navigate to http://localhost/admin and ensure the static assets load correctly.
 
 You can also verify in the logs -- via docker-compose -f docker-compose.prod.yml logs -f -- that requests to the static files are served up successfully via Nginx:
