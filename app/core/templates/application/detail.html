@@ -6,22 +6,20 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-
-<div class="col-sm-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">{{ application.project_name }} #{{ application.application_no }}</h3>
-            <p class="card-category">Status: {{ application.status }} / {{ application.apptication_date }} / Impact: {{ application.people_impacted }} people</p>
-        </div>
-        <div class="card-body">
-            <h4>Project Description</h4>
-            <p>{{ application.project_description }}</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ application.project_name }} #{{ application.application_no }}</h3>
+                <p class="card-category">Status: {{ application.status }} / {{ application.apptication_date }} / Impact: {{ application.people_impacted }} people</p>
+            </div>
+            <div class="card-body">
+                <h4>Project Description</h4>
+                <p>{{ application.project_description }}</p>
+            </div>
         </div>
     </div>
 </div>
-
-
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->

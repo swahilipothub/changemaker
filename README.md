@@ -64,6 +64,8 @@ $ docker-compose down -v
 > Production Environment
 
 ```bash
+$ cp .env.prod.example .env.prod
+$ cp .env.prod.db.example .env.prod
 $ docker-compose -f docker-compose.prod.yml down -v
 $ docker-compose -f docker-compose.prod.yml up -d --build
 $ docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput

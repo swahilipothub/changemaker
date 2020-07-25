@@ -143,4 +143,4 @@ class ApplicationForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 
             'subcounty', 'birth_date', 'id_number', 
             'mobile_number', 'gender', 'project_name', 
-            'project_description', 'project_sector', 'people_impacted')
+            'project_description', 'project_sector', 'people_impacted', 'status')

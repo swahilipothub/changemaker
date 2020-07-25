@@ -22,6 +22,8 @@ def index(request):
     total_users = Profile.objects.count()
     total_applications = Application.objects.count()
     pending_applications = Application.objects.filter(status="PENDING").count()
+    cancelled_applications = Application.objects.filter(status="CANCELLED").count()
+    approved_applications = Application.objects.filter(status="APPROVED").count()
 
     return render(
         request, "index.html", 
@@ -29,7 +31,9 @@ def index(request):
             "users": users, 
             "total_users": total_users, 
             "total_applications": total_applications,
-            "pending_applications": pending_applications
+            "pending_applications": pending_applications,
+            "cancelled_applications": cancelled_applications,
+            "approved_applications": approved_applications
         })
 
 

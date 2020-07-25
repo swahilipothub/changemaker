@@ -44,7 +44,6 @@ class SMSListView(LoginRequiredMixin, CreateView, ListView):
             else:
                 mobile = mobile
             recipients.append(mobile)
-        print(recipients)
         sms.send(message, recipients)
         
         obj.save()

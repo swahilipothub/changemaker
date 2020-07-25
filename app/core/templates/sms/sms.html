@@ -4,94 +4,94 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card flex-fill">
+            <div class="card-body table-full-width">
+                <div class="card-header">
+                    <div class="card-actions float-right">
+                        <a href="#" class="mr-1">
+                            <i class="align-middle" data-feather="refresh-cw"></i>
+                        </a>
+                        <div class="d-inline-block dropdown show">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModalPrimary">
+                                Send SMS
+                            </button>
 
-<div class="col-md-12">
-    <div class="card flex-fill">
-        <div class="card-body table-full-width">
-            <div class="card-header">
-                <div class="card-actions float-right">
-                    <a href="#" class="mr-1">
-                        <i class="align-middle" data-feather="refresh-cw"></i>
-                    </a>
-                    <div class="d-inline-block dropdown show">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModalPrimary">
-                            Send SMS
-                        </button>
+                            <div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
 
-                        <div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+                                        <form role="form" method="post" action="">
+                                        {% csrf_token %}
 
-                                    <form role="form" method="post" action="">
-                                    {% csrf_token %}
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Default modal</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
 
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Default modal</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="modal-body m-3">
-                                    
-                                                <div class="form-group">
-                                                    <div class="col-md-12 ">
-                                                        <label for="changemaker">{{ form.changemaker.label }}</label>
-                                                        {{ form.changemaker }}
+                                            <div class="modal-body m-3">
+                                        
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 ">
+                                                            <label for="changemaker">{{ form.changemaker.label }}</label>
+                                                            {{ form.changemaker }}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <span class="text-error">{{ form.changemaker.errors }}</span>
-                                    
-                                                <div class="form-group">
-                                                    <div class="col-md-12 ">
-                                                        <label for="message">{{ form.message.label }}</label>
-                                                        {{ form.message }}
+                                                    <span class="text-error">{{ form.changemaker.errors }}</span>
+                                        
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 ">
+                                                            <label for="message">{{ form.message.label }}</label>
+                                                            {{ form.message }}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <span class="text-error">{{ form.message.errors }}</span>
-                                
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Send Now</button>
-                                        </div>
+                                                    <span class="text-error">{{ form.message.errors }}</span>
+                                    
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Send Now</button>
+                                            </div>
 
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <a href="#" data-toggle="dropdown" data-display="static">
-                            <i class="align-middle" data-feather="more-vertical"></i>
-                        </a>
+                            <a href="#" data-toggle="dropdown" data-display="static">
+                                <i class="align-middle" data-feather="more-vertical"></i>
+                            </a>
 
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">smsly</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">smsly</a>
+                            </div>
                         </div>
                     </div>
+                    <h5 class="card-title mb-0">My messages</h5>
                 </div>
-                <h5 class="card-title mb-0">My messages</h5>
+                <table id="bootstrap-table" class="table table-striped my-0">
+                    <thead>
+                        <th data-field="name" data-sortable="true">Changemakers</th>
+                        <th data-field="salary" data-sortable="true">Message</th>
+                    </thead>
+                    <tbody>
+                        {% if messages %}
+                            {% for sms in messages %}
+                                <tr>
+                                    <td>{{ sms.changemaker }}</td>
+                                    <td>{{ sms.message }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
             </div>
-            <table id="bootstrap-table" class="table table-striped my-0">
-                <thead>
-                    <th data-field="name" data-sortable="true">Changemakers</th>
-                    <th data-field="salary" data-sortable="true">Message</th>
-                </thead>
-                <tbody>
-                    {% if messages %}
-                        {% for sms in messages %}
-                            <tr>
-                                <td>{{ sms.changemaker }}</td>
-                                <td>{{ sms.message }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
