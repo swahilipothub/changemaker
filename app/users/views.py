@@ -73,7 +73,7 @@ def settings(request):
     profile = request.user.profile
 
     if request.method == 'POST':
-        form = ProfileForm(instance=profile, data=request.POST)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         form_pwd = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()

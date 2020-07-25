@@ -1,6 +1,7 @@
 venv
 *.pyc
 staticfiles
+mediafiles
 .env
 db.sqlite3
 app/core/local_settings.py

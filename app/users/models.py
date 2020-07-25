@@ -3,6 +3,7 @@
 License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
+from django_resized import ResizedImageField
 
 from datetime import date
 from django.db import models
@@ -38,14 +39,39 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.mobile_number
 
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class Profile(models.Model):
+
+    SUBCOUNTY = [
+        ('Mvita', 'Mvita'),
+        ('Kisauni', 'Kisauni'),
+        ('Nyali', 'Nyali'),
+        ('Changamwe', 'Changamwe'),
+        ('Jomvu', 'Jomvu'),
+        ('Likoni', 'Likoni')
+    ]
+
+    GENDER = [
+        ('Male', 'Male'),
+        ('Female', 'Female')
+    ]
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     email = models.EmailField(_('email address'), blank=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER, blank=True, null=True)
+    id_number = models.CharField(max_length=10, blank=True, null=True)
+    location = models.CharField(max_length=32, choices=SUBCOUNTY, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     bio = models.CharField(max_length=500, blank=True)
+    avatar = ResizedImageField(
+        size=[128, 128], crop=['middle', 'center'], 
+        upload_to=user_directory_path, blank=True, null=True)
 
     def get_full_name(self):
         '''

@@ -23,6 +23,12 @@
                 </a>
             </div>
         </div>
+        <!-- <div class="text-center">
+            <img alt="{{ obj.first_name }}" src="{{ obj.profile_picture.url }}" class="rounded-circle img-responsive mt-2" width="128" height="128" />
+            <div class="mt-2">
+                <span class="btn btn-primary"><i class="fas fa-upload"></i> Upload</span>
+            </div>
+        </div> -->
     </div>
 
     <div class="col-md-9 col-xl-10">
@@ -50,7 +56,7 @@
                         <h5 class="card-title mb-0">Private info</h5>
                     </div>
                     <div class="card-body">
-                        <form class="form" method="post" action="#">
+                        <form class="form" method="post" action="#" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -62,13 +68,25 @@
                                     {{ form.last_name }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">{{ form.email.label}}</label>
-                                {{ form.email }}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="email">{{ form.email.label}}</label>
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="id_number">{{ form.id_number.label}}</label>
+                                    {{ form.id_number }}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="birth_date">{{ form.birth_date.label}}</label>
-                                {{ form.birth_date }}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="birth_date">{{ form.birth_date.label}}</label>
+                                    {{ form.birth_date }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="gender">{{ form.gender.label}}</label>
+                                    {{ form.gender }}
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
@@ -77,6 +95,10 @@
                             <div class="form-group">
                                 <label for="project_name">{{ form.bio.label }}</label>
                                 {{ form.bio }}
+                            </div>
+                            <div class="form-group">
+                                <label for="avatar">{{ form.avatar.label }}</label>
+                                {{ form.avatar }}
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>

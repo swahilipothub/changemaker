@@ -7,7 +7,9 @@
     </a>
     <div class="sidebar-content">
         <div class="sidebar-user">
-            <img src="/static/assets/img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="{{ request.user.profile.full_name }}" />
+            {% if request.user.profile.avatar %}
+                <img src="{{ request.user.profile.avatar.url }}" class="img-fluid rounded-circle mb-2" alt="{{ request.user.profile.full_name }}" />
+            {% endif %}
             <div class="font-weight-bold">{{ request.user.profile.full_name }}</div>
             <small>{{ request.user.mobile_number }}</small>
         </div>

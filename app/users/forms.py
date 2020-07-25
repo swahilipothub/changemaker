@@ -7,7 +7,23 @@ Copyright (c) 2019 - present AppSeed.us
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
+from core.utils import DateInput
+
 from .models import User, Profile
+
+SUBCOUNTY = (
+    ('Mvita', 'Mvita'),
+    ('Kisauni', 'Kisauni'),
+    ('Nyali', 'Nyali'),
+    ('Changamwe', 'Changamwe'),
+    ('Jomvu', 'Jomvu'),
+    ('Likoni', 'Likoni')
+)
+
+GENDER = (
+    ('Male', 'Male'),
+    ('Female', 'Female')
+)
 
 
 class UserCreationForm(UserCreationForm):
@@ -90,20 +106,36 @@ class ProfileForm(forms.ModelForm):
                 "class": "form-control"
             }
         ))
-    location = forms.CharField(
+    gender = forms.CharField(
+        widget=forms.Select(
+            choices=GENDER,
+            attrs={
+                "placeholder" : "Gender",                
+                "class": "form-control"
+            }
+        ))
+    id_number = forms.CharField(
         widget=forms.TextInput(
+            attrs={
+                "placeholder" : "ID Number",                
+                "class": "form-control"
+            }
+        ))
+    location = forms.CharField(
+        widget=forms.Select(
+            choices=SUBCOUNTY,
             attrs={
                 "placeholder" : "Location",                
                 "class": "form-control"
             }
         ))
-    birth_date = forms.DateField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder" : "Birth Date",                
-                "class": "form-control"
-            }
-        ))
+    
+    birth_date = forms.DateField(widget=DateInput(
+        attrs={             
+            "class": "form-control"
+        }
+    ))
+
     bio = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -113,10 +145,15 @@ class ProfileForm(forms.ModelForm):
                 'style': 'height: 6em;'
             }
         ))
+    avatar = forms.FileField(
+        
+    )
     
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'email', 'location', 'birth_date', 'bio',)
+        fields = (
+            'first_name', 'last_name', 'email', 'gender', 'id_number',
+            'location', 'birth_date', 'bio', 'avatar')
 
     def save(self, *args, **kwargs):
         u = self.instance

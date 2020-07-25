@@ -84,6 +84,7 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
                 profile.first_name = first_name
                 profile.last_name = last_name
                 profile.birth_date = birth_date
+                profile.location = location
                 profile.save()
                 print("New Password", password, "User:", user)
                 obj.user = user

@@ -1,6 +1,8 @@
 from django import forms
 from .models import Application
 
+from core.utils import DateInput
+
 SECTORS = (
     ('Technology', 'Technology and Innovation'),
     ('Art', 'Creativity and Art'),
@@ -36,10 +38,6 @@ FAVORITE_COLORS_CHOICES = [
     ('green', 'Green'),
     ('black', 'Black'),
 ]
-
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
 
 
 class ApplicationForm(forms.ModelForm):
@@ -85,7 +83,12 @@ class ApplicationForm(forms.ModelForm):
             }
         ))
     
-    birth_date = forms.DateField(widget=DateInput)
+    birth_date = forms.DateField(widget=DateInput(
+        attrs={
+            "placeholder" : "Date of Birth",                
+            "class": "form-control"
+        }
+    ))
 
     mobile_number = forms.CharField(
         widget=forms.TextInput(
