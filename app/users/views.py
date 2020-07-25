@@ -91,19 +91,3 @@ def settings(request):
         'form_pwd': form_pwd,
         'profile': profile
     })
-
-
-# @login_required
-# def change_password(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             update_session_auth_hash(request, user)
-#             messages.success(request, 'Your password was successfully updated!')
-#             return HttpResponseRedirect(reverse('profile'))
-#     else:
-#         form = PasswordChangeForm(request.user)
-#     return render(request, 'accounts/change_password.html', {
-#         'form': form
-#     })

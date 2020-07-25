@@ -82,3 +82,12 @@ Again, requests to http://localhost/staticfiles/* will be served from the "stati
 Navigate to http://localhost/admin and ensure the static assets load correctly.
 
 You can also verify in the logs -- via docker-compose -f docker-compose.prod.yml logs -f -- that requests to the static files are served up successfully via Nginx:
+
+
+Ensure the default Django tables were created:
+
+$ docker-compose exec db psql --username=changemaker --dbname=changemaker_prod
+$ \l
+$ \c chnagemaker_prod
+$ \dt
+$ \q

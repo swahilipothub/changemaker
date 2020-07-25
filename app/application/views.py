@@ -73,7 +73,7 @@ class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
 
         message = ""
         if status == 'APPROVED':
-            message = """Hi %s, you application has been approved! Use your mobile number: %s and password: %s to login to the portal""" % (first_name, mobile_number, password) 
+            message = """Hi %s, your application has been approved! Use your mobile number: %s and password: %s to login to the portal""" % (first_name, mobile_number, password) 
             if User.objects.filter(mobile_number=mobile_number).exists():
                 print(u'User with this mobile number "%s" is already in use.' % mobile_number)
                 obj.user = User.objects.get(mobile_number=mobile_number)
