@@ -26,7 +26,6 @@ class Application(models.Model):
     STATUS = [
         ('PENDING', 'Pending Approval'),
         ('APPROVED', 'Approved'),
-        ('DENIED', 'Denied'),
         ('CANCELLED', 'Cancelled')
     ]
 
@@ -44,7 +43,8 @@ class Application(models.Model):
         ('Likoni', 'Likoni')
     ]
 
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     email = models.EmailField()
     mobile_number = models.CharField(max_length=13)
     id_number = models.CharField(max_length=10)
@@ -83,7 +83,7 @@ class Application(models.Model):
     
     class Meta:
         ordering = ["-application_no"]
-        unique_together = [['mobile_number', 'id_number', 'application_no']]
+        unique_together = [['mobile_number', 'email', 'id_number', 'application_no']]
 
     def __str__(self):
         return self.application_no

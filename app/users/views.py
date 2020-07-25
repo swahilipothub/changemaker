@@ -40,7 +40,7 @@ def login_view(request):
 
 def register_user(request):
 
-    msg     = None
+    msg = None
     success = False
 
     if request.method == "POST":
@@ -51,7 +51,7 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(mobile_number=mobile_number, password=raw_password)
 
-            msg     = 'User created.'
+            msg = 'User created.'
             success = True
             
             return redirect("/login/")
