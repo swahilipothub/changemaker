@@ -31,10 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Custom apps
     'users',   
     'web',
     'application',
-    'sms'
+    'sms',
+    # Third party apps
 ]
 
 AUTH_USER_MODEL = 'users.User'

@@ -15,6 +15,8 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('api/data/gender/', views.get_gender_data, name='api-data-gender'),
+    path('api/data/subcounty/', views.get_subcounty_data, name='api-data-subcounty'),
     path('apply/', views.Apply.as_view(), name='apply'),
     # path('<int:pk>', views.ProfileDetailView.as_view(), name='profile-detail'),
 ]

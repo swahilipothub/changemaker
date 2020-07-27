@@ -6,6 +6,12 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+
+<script>
+    
+    
+</script>
+
 <div class="row">
     <div class="col-md-6 col-lg-3 col-xl">
         <div class="card">
@@ -102,7 +108,7 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-lg-12 d-flex">
+    <div class="col-12 col-lg-9 d-flex">
         <div class="card flex-fill">
             <div class="card-header">
                 <div class="card-actions float-right">
@@ -126,6 +132,7 @@
             <table id="datatables-dashboard-projects" class="table table-striped my-0">
                 <thead>
                     <tr>
+                        <th data-field="#">#</th>
                         <th data-field="name" data-sortable="true">Name</th>
                         <th data-field="mobile_number" data-sortable="true">Mobile Number</th>
                         <th data-field="email" data-sortable="true">Email</th>
@@ -139,33 +146,55 @@
                     {% if users %}
                         {% for user in users %}
 
-                    <tr>
-                        <td>{{ user.full_name }}</td>
-                        <td>{{ user.user }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.age }}</td>
-                        <td>{{ user.location }}</td>
-                        <td>
-                            {% if user.user.is_active %} 
-                                <span class="badge badge-pill badge-success">Active</span>
-                            {% else %} 
-                                <span class="badge badge-pill badge-warning">Not Active</span>
-                            {% endif %}
-                        </td>
-                        <!-- <td class="table-action">
-                            <a href="/profile/{{ user.id }}"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                            <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
-                        </td> -->
-                    </tr>
+                        <tr>
+                            <td tabindex="0">
+                                {% if user.avatar %}
+                                    <img src="{{ user.avatar.url }}" width="32" height="32" class="rounded-circle my-n1" alt="{{ user.avatar.first_name }}">
+                                {% else %}
+                                    <img src="/static/assets/img/avatars/avatar-1.jpg" width="32" height="32" class="rounded-circle my-n1" alt="Avatar">
+                                {% endif %}
+                            </td>
+                            <td>{{ user.full_name }}</td>
+                            <td>{{ user.user }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.age }}</td>
+                            <td>{{ user.location }}</td>
+                            <td>
+                                {% if user.user.is_active %} 
+                                    <span class="badge badge-pill badge-success">Active</span>
+                                {% else %} 
+                                    <span class="badge badge-pill badge-warning">Not Active</span>
+                                {% endif %}
+                            </td>
+                            <!-- <td class="table-action">
+                                <a href="/profile/{{ user.id }}"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                            </td> -->
+                        </tr>
 
-                    {% endfor %}
+                        {% endfor %}
                     {% endif %}
                     
                 </tbody>
             </table>
         </div>
     </div>
-    <!-- <div class="col-12 col-lg-4 d-flex">
+    <div class="col-12 col-lg-3 d-flex">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Gender</h5>
+                <!-- <h6 class="card-subtitle text-muted">Pie charts are excellent at showing the relational proportions between data.</h6> -->
+            </div>
+            <div class="card-body">
+                <div class="chart chart-xs"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="chartjs-pie" width="458" height="160" class="chartjs-render-monitor" style="display: block; height: 200px; width: 573px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-lg-12 d-flex">
         <div class="card flex-fill w-100">
             <div class="card-header">
                 <div class="card-actions float-right">
@@ -184,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-                <h5 class="card-title mb-0">Monthly Sales</h5>
+                <h5 class="card-title mb-0">Applications by Subcounty</h5>
             </div>
             <div class="card-body d-flex w-100">
                 <div class="align-self-center chart chart-lg">
@@ -192,89 +221,40 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
-    $(function() {
-        // Line chart
-        new Chart(document.getElementById("chartjs-dashboard-line"), {
-            type: 'line',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                        label: "Orders",
-                        fill: true,
-                        backgroundColor: window.theme.primary,
-                        borderColor: window.theme.primary,
-                        borderWidth: 2,
-                        data: [3, 2, 3, 5, 6, 5, 4, 6, 9, 10, 8, 9]
-                    },
-                    {
-                        label: "Sales ($)",
-                        fill: true,
-                        backgroundColor: "rgba(0, 0, 0, 0.05)",
-                        borderColor: "rgba(0, 0, 0, 0.05)",
-                        borderWidth: 2,
-                        data: [5, 4, 10, 15, 16, 12, 10, 13, 20, 22, 18, 20]
-                    }
-                ]
-            },
-            options: {
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    intersect: false
-                },
-                hover: {
-                    intersect: true
-                },
-                plugins: {
-                    filler: {
-                        propagate: false
-                    }
-                },
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        reverse: true,
-                        gridLines: {
-                            color: "rgba(0,0,0,0.0)"
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            stepSize: 5
-                        },
-                        display: true,
-                        gridLines: {
-                            color: "rgba(0,0,0,0)",
-                            fontColor: "#fff"
-                        }
-                    }]
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(function() {
+    var endpoint = '/api/data/gender/'
+    var defaultData = []
+    var labels = [];
+    // var index_data = parseInt("{{ total_applications }}")
+    // console.log("Hello World:", index_data)
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+            labels = data.labels
+            defaultData = data.default_data
+            setChart()
+            console.log(data)
+        },
+        error: function(error_data){
+            console.log(error_data)
+        }
+    })
+
+    function setChart() {
         // Pie chart
-        new Chart(document.getElementById("chartjs-dashboard-pie"), {
-            type: 'pie',
+        new Chart(document.getElementById("chartjs-pie"), {
+            type: "pie",
             data: {
-                labels: ["Chrome", "Firefox", "IE", "Other"],
+                labels: labels,
                 datasets: [{
-                    data: [4401, 4003, 1589],
+                    data: defaultData,
                     backgroundColor: [
                         window.theme.primary,
                         window.theme.warning,
@@ -285,30 +265,46 @@
                 }]
             },
             options: {
-                responsive: !window.MSInputMethodContext,
                 maintainAspectRatio: false,
                 legend: {
                     display: false
-                },
-                cutoutPercentage: 75
+                }
             }
         });
-    });
+    };
 </script>
+
 <script>
-    $(function() {
+    var endpoint = '/api/data/subcounty/'
+    var defaultSubcountyData = []
+    var subcounty_labels = [];
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+            subcounty_labels = data.subcounty_labels
+            defaultSubcountyData = data.subcounty_data
+            setSubcountyChart()
+            console.log(data)
+        },
+        error: function(error_data){
+            console.log(error_data)
+        }
+    })
+
+    function setSubcountyChart(){
         // Bar chart
         new Chart(document.getElementById("chartjs-dashboard-bar"), {
             type: 'bar',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: subcounty_labels,
                 datasets: [{
-                    label: "This year",
+                    // label: "This year",
                     backgroundColor: window.theme.primary,
                     borderColor: window.theme.primary,
                     hoverBackgroundColor: window.theme.primary,
                     hoverBorderColor: window.theme.primary,
-                    data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+                    data: defaultSubcountyData,
                     barPercentage: .75,
                     categoryPercentage: .5
                 }]
@@ -337,47 +333,9 @@
                 }
             }
         });
-    });
+    };
 </script>
-<script>
-    $(function() {
-        var mapData = {
-            "US": 298,
-            "SA": 200,
-            "DE": 220,
-            "FR": 540,
-            "CN": 120,
-            "AU": 760,
-            "BR": 550,
-            "IN": 200,
-            "GB": 120,
-        };
-        $('#world_map').vectorMap({
-            map: 'world_mill',
-            backgroundColor: "transparent",
-            zoomOnScroll: false,
-            regionStyle: {
-                initial: {
-                    fill: '#e4e4e4',
-                    "fill-opacity": 0.9,
-                    stroke: 'none',
-                    "stroke-width": 0,
-                    "stroke-opacity": 0
-                }
-            },
-            series: {
-                regions: [{
-                    values: mapData,
-                    scale: [window.theme.primary],
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-        });
-        setTimeout(function() {
-            $(window).trigger('resize');
-        }, 350)
-    })
-</script>
+
 <script>
     $(function() {
         $('#datatables-dashboard-projects').DataTable({
