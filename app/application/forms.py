@@ -84,8 +84,7 @@ class ApplicationForm(forms.ModelForm):
         ))
     
     birth_date = forms.DateField(widget=DateInput(
-        attrs={
-            "placeholder" : "Date of Birth",                
+        attrs={             
             "class": "form-control"
         }
     ))

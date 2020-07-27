@@ -12,7 +12,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("users.urls")),  # add this
-    path("", include("app.urls")),  # add this
+    path("", include("web.urls")),  # add this
     path("sms/", include("sms.urls")),
     path("application/", include("application.urls"))
 ]

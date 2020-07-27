@@ -16,6 +16,17 @@ RUN apk update \
 RUN apk update \
     && apk add gcc jpeg-dev zlib-dev libjpeg
 
+# RUN apk --no-cache add jpeg-dev \
+#         zlib-dev \
+#         freetype-dev \
+#         lcms2-dev \
+#         openjpeg-dev \
+#         tiff-dev \
+#         tk-dev \
+#         tcl-dev \
+#         harfbuzz-dev \
+#         fribidi-dev
+
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
