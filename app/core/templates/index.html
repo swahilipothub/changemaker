@@ -109,6 +109,49 @@
 
 <div class="row">
     <div class="col-12 col-lg-9 d-flex">
+        <div class="card flex-fill w-100">
+            <div class="card-header">
+                <div class="card-actions float-right">
+                    <a href="#" class="mr-1">
+                        <i class="align-middle" data-feather="refresh-cw"></i>
+                    </a>
+                    <div class="d-inline-block dropdown show">
+                        <a href="#" data-toggle="dropdown" data-display="static">
+                            <i class="align-middle" data-feather="more-vertical"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="card-title mb-0">Applications by Subcounty</h5>
+            </div>
+            <div class="card-body d-flex w-100">
+                <div class="align-self-center chart chart-lg">
+                    <canvas id="chartjs-dashboard-bar"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-3 d-flex">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Gender</h5>
+                <!-- <h6 class="card-subtitle text-muted">Pie charts are excellent at showing the relational proportions between data.</h6> -->
+            </div>
+            <div class="card-body">
+                <div class="chart chart-xs"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="chartjs-pie" width="458" height="160" class="chartjs-render-monitor" style="display: block; height: 200px; width: 573px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-lg-12 d-flex">
         <div class="card flex-fill">
             <div class="card-header">
                 <div class="card-actions float-right">
@@ -177,49 +220,6 @@
                     
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div class="col-12 col-lg-3 d-flex">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Gender</h5>
-                <!-- <h6 class="card-subtitle text-muted">Pie charts are excellent at showing the relational proportions between data.</h6> -->
-            </div>
-            <div class="card-body">
-                <div class="chart chart-xs"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="chartjs-pie" width="458" height="160" class="chartjs-render-monitor" style="display: block; height: 200px; width: 573px;"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-lg-12 d-flex">
-        <div class="card flex-fill w-100">
-            <div class="card-header">
-                <div class="card-actions float-right">
-                    <a href="#" class="mr-1">
-                        <i class="align-middle" data-feather="refresh-cw"></i>
-                    </a>
-                    <div class="d-inline-block dropdown show">
-                        <a href="#" data-toggle="dropdown" data-display="static">
-                            <i class="align-middle" data-feather="more-vertical"></i>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <h5 class="card-title mb-0">Applications by Subcounty</h5>
-            </div>
-            <div class="card-body d-flex w-100">
-                <div class="align-self-center chart chart-lg">
-                    <canvas id="chartjs-dashboard-bar"></canvas>
-                </div>
-            </div>
         </div>
     </div>
 </div>
