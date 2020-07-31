@@ -138,6 +138,8 @@ class ApplicationForm(forms.ModelForm):
                 "class": "form-control"
             }
         ))
+    
+    status = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Application

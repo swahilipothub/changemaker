@@ -1,0 +1,100 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} SMS Settings {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card flex-fill">
+            <div class="card-body table-full-width">
+                <div class="card-header">
+                    <div class="card-actions float-right">
+                        <div class="d-inline-block dropdown show">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#defaultModalPrimary">
+                                Add SMS Settings
+                            </button>
+
+                            <div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <form role="form" method="post" action="">
+                                            {% csrf_token %}
+    
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">SMS Setiings</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+    
+                                                <div class="modal-body m-3">
+                                            
+                                                        <div class="form-group">
+                                                            <div class="col-md-12 ">
+                                                                <label for="username">{{ form.username.label }}</label>
+                                                                {{ form.username }}
+                                                            </div>
+                                                        </div>
+                                                        <span class="text-error">{{ form.username.errors }}</span>
+                                            
+                                                        <div class="form-group">
+                                                            <div class="col-md-12 ">
+                                                                <label for="api_key">{{ form.api_key.label }}</label>
+                                                                {{ form.api_key }}
+                                                            </div>
+                                                        </div>
+                                                        <span class="text-error">{{ form.api_key.errors }}</span>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-12 ">
+                                                                <label for="sender">{{ form.sender.label }}</label>
+                                                                {{ form.sender }}
+                                                            </div>
+                                                        </div>
+                                                        <span class="text-error">{{ form.sender.errors }}</span>
+                                        
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Add Settings</button>
+                                                </div>
+    
+                                            </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title mb-0">SMS Settings</h5>
+                </div>
+                <table id="bootstrap-table" class="table table-striped my-0">
+                    <thead>
+                        <th data-field="username" data-sortable="true">Username</th>
+                        <th data-field="sender" data-sortable="true">Sender ID</th>
+                        <th data-field="api_key" data-sortable="true">API Key</th>
+                    </thead>
+                    <tbody>
+                        {% if objects %}
+                            {% for obj in objects %}
+                                <tr>
+                                    <td>{{ obj.username }}</td>
+                                    <td>{{ obj.sender }}</td>
+                                    <td>{{ obj.api_key }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -25,16 +25,15 @@ def index(request):
     cancelled_applications = Application.objects.filter(status="CANCELLED").count()
     approved_applications = Application.objects.filter(status="APPROVED").count()
 
-    return render(
-        request, "index.html", 
-        {
-            "users": users, 
-            "total_users": total_users, 
-            "total_applications": total_applications,
-            "pending_applications": pending_applications,
-            "cancelled_applications": cancelled_applications,
-            "approved_applications": approved_applications,
-        })
+    context = {
+        "users": users, 
+        "total_users": total_users, 
+        "total_applications": total_applications,
+        "pending_applications": pending_applications,
+        "cancelled_applications": cancelled_applications,
+        "approved_applications": approved_applications,
+    }
+    return render(request, "index.html", context)
 
 def get_gender_data(request, *args, **kwargs):
     labels = ["Male", "Female"]
@@ -82,7 +81,6 @@ class Apply(CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.save()
-        print("hdsjdhhhhhhhhhhhhhhhhhhh")
         return HttpResponseRedirect('/login/')
 
 

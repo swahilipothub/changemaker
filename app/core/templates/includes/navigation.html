@@ -19,44 +19,40 @@
                 Main
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {% if request.path == '/' %} active {%endif%}">
                 <a class="sidebar-link" href="/">
                     <i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {% if request.path == '/application/' %} active {%endif%}">
                 <a class="sidebar-link" href="/application/">
                     <i class="align-middle mr-2 fas fa-fw fa-user-check"></i> <span class="align-middle">My Applications</span>
                 </a>
             </li>
 
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item {% if request.path == '/sms/' %} active {%endif%}">
                 <a class="sidebar-link" href="/sms/">
                     <i class="align-middle mr-2 fas fa-fw fa-envelope-open"></i> <span class="align-middle">Messages</span>
                 </a>
+            </li> -->
+
+            <li class="sidebar-item {% if request.path == '/sms/' or request.path == '/sms/templates/' or request.path == '/sms/settings/' %} active {%endif%}">
+                <a href="#sms" data-toggle="collapse" class="sidebar-link">
+                    <i class="align-middle mr-2 fas fa-fw fa-envelope-open"></i> <span class="align-middle">Messages</span>
+                </a>
+                <ul id="sms" class="sidebar-dropdown list-unstyled collapse {% if request.path == '/sms/' or request.path == '/sms/templates/' or request.path == '/sms/settings/' %} show {%endif%}" data-parent="#sidebar">
+                    <li class="sidebar-item {% if request.path == '/sms/' %} active {%endif%}"><a class="sidebar-link" href="/sms/">Messages</a></li>
+                    <li class="sidebar-item {% if request.path == '/sms/templates/' %} active {%endif%}"><a class="sidebar-link" href="/sms/templates/">SMS Templates</a></li>
+                    <li class="sidebar-item {% if request.path == '/sms/settings/' %} active {%endif%}"><a class="sidebar-link" href="/sms/settings/">SMS Settings</a></li>
+                </ul>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {% if request.path == '/profile/settings/' %} active {%endif%}">
                 <a class="sidebar-link" href="/profile/settings/">
                     <i class="align-middle mr-2 fas fa-fw fa-users-cog"></i> <span class="align-middle">Settings</span>
                 </a>
             </li>
-
-            <!-- <li class="sidebar-item active">
-                <a href="#pages" data-toggle="collapse" class="sidebar-link">
-                    <i class="align-middle mr-2 fas fa-fw fa-file"></i> <span class="align-middle">Pages</span>
-                </a>
-                <ul id="pages" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-settings.html">Settings</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Clients <span class="sidebar-badge badge badge-pill badge-primary">New</span></a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Invoice</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Pricing</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-tasks.html">Tasks</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-chat.html">Chat <span class="sidebar-badge badge badge-pill badge-primary">New</span></a></li>
-                    <li class="sidebar-item active"><a class="sidebar-link" href="pages-blank.html">Blank Page</a></li>
-                </ul>
-            </li> -->
 
     </div>
 </nav>
