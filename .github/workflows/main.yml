@@ -6,6 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
 
     steps:
     - uses: actions/checkout@v2
@@ -26,38 +27,3 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Deploy to Production Server
-    - uses: actions/checkout@v2
-    - name: Add Project environment variables to .env.prod
-      run: |
-        echo DEBUG=0 >> .env.prod
-        echo DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1] * >> .env.prod
-        echo SQL_ENGINE=django.db.backends.postgresql >> .env.prod
-        echo DATABASE=postgres >> .env.prod
-        echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env.prod
-        echo SQL_DATABASE=${{ secrets.SQL_DATABASE }} >> .env.prod
-        echo SQL_USER=${{ secrets.SQL_USER }} >> .env.prod
-        echo SQL_PASSWORD=${{ secrets.SQL_PASSWORD }} >> .env.prod
-        echo SQL_HOST=${{ secrets.SQL_HOST }} >> .env.prod
-        echo SQL_PORT=${{ secrets.SQL_PORT }} >> .env.prod
-        echo AFRICASTALKING_USERNAME=${{ secrets.AFRICASTALKING_USERNAME }} >> .env.prod
-        echo AFRICASTALKING_API_KEY=${{ secrets.AFRICASTALKING_API_KEY }} >> .env.prod
-        echo AFRICASTALKING_SENDER=${{ secrets.AFRICASTALKING_SENDER }} >> .env.prod
-    - name: Add the private SSH key to the ssh-agent
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-        mkdir -p ~/.ssh
-        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
-    - name: Build and deploy images on production Server
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-        scp  -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml changemaker@${{ secrets.APP_URL }}:/home/changemaker
-        ssh -o StrictHostKeyChecking=no changemaker@${{ secrets.APP_URL }} << 'ENDSSH'
-          cd /home/changemaker
-          docker-compose -f docker-compose.prod.yml up -d --build
-          docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
-        ENDSSH
