@@ -31,7 +31,7 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: ls -a
-        host: ${{ secrets.APP_URL }}
+        host: ${{ secrets.HOST }}
         username: changemaker
         passphrase: ${{ secrets.SECRET_KEY }}
   deploy:
